@@ -14,16 +14,23 @@ Welcome! You're working on **Pet**, a desktop screen-pet app for Windows and mac
 
 ## Quick reference
 
-- **Stack**: Tauri v2, Svelte 5, Vite, Canvas 2D (frontend), Rust (backend)
+- **Stack**: Tauri v2, SvelteKit, Vite, Canvas 2D (frontend), Rust (backend)
 - **Platforms**: macOS and Windows desktop only (no web, no mobile)
 - **Inspiration**: comnyang.com (desktop pet with interactions)
-- **Start here**: Phase 0 (scaffold) or Phase -1 (docs) if coming fresh
+- **Dev server**: `cd /Users/nikhilbabuguntipally/Developer/Pet && npm run tauri dev`
+
+## Git branching rules — READ BEFORE OPENING ANY PR
+
+- **`agents`** = development branch. **ALL phase PRs must target `agents`.** This branch is checked out at the repo root (`/Users/nikhilbabuguntipally/Developer/Pet/`) and is the live dev environment.
+- **`main`** = production only. Only merged into at **Phase 16 (ship)**. Never open a phase PR targeting `main`.
+- **Worktree branches** (`worktree-phase-N`) are temporary scratchpads — created per phase, worked on, then merged into `agents` via PR.
+- PR pattern: `worktree-phase-N` → **`agents`** → (Phase 16 only) → `main`
 
 ## Key constraints
 
-- **Fresh start**: Ground zero. No prior code on main; all source files created in this session.
 - **Desktop-focused**: Transparent overlay window, real OS window manipulation (mischief mode), global keyboard/mouse hooks.
 - **Three independent agents**: Each owns a layer (UI, Frontend, Backend). Work in parallel within phases.
+- **SvelteKit**: Scaffold uses SvelteKit (not plain Svelte). Shared code lives in `src/lib/`, imported via `$lib/`.
 
 ## Help
 

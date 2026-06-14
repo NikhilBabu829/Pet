@@ -25,6 +25,13 @@
 - Vitest configured with jsdom; `src/lib/` structure created
 - Sprite spec documented: 11 animations, 32×32 px frames, RGBA PNG
 
+## Git Workflow
+
+- All phase PRs target **`agents`** (not `main`)
+- `main` is touched only at Phase 16 (production release)
+- Per-phase pattern: create `worktree-phase-N` branch → do work → open PR → merge into `agents`
+- After merging, the repo root at `/Users/nikhilbabuguntipally/Developer/Pet/` reflects the latest dev state; run `npm run tauri dev` from there
+
 ## Decision Log
 - 2026-06-14: Scaffold used SvelteKit (not plain Svelte) — template `svelte-ts` resolves to SvelteKit. Shared code lives in `src/lib/` (imported via `$lib/`). No change needed; SvelteKit is compatible with the plan.
 - 2026-06-14: `@sveltejs/adapter-static` was already in scaffold; `fallback: 'index.html'` configured for Tauri.

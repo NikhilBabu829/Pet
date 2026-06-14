@@ -69,11 +69,21 @@ Defined per phase; see `PLAN.md` for full list. Key ones:
 ### Animation Name Contract (UI → Frontend)
 See `assets/SPRITE_SPEC.md` for full catalog. Animation names: `idle`, `walk`, `run`, `sit`, `sleep`, `pet`, `type`, `overheat`, `mischief`, `pomo_work`, `pomo_break`.
 
+## Git Branching
+
+| Branch | Purpose |
+|--------|---------|
+| `agents` | **Development branch** — all phase PRs target this. Checked out at repo root. |
+| `main` | **Production only** — never target for phase PRs. Merged into at Phase 16 only. |
+| `worktree-phase-N` | Temporary per-phase scratchpad. Merges into `agents`, then discarded. |
+
+PR pattern: `worktree-phase-N` → **`agents`** → (Phase 16 only) → `main`
+
 ## Environment
 
 | Command | Purpose |
 |---------|---------|
-| `npm run tauri dev` | Launch app in dev mode |
+| `npm run tauri dev` | Launch app in dev mode (run from repo root on `agents` branch) |
 | `npm run build` | Build SvelteKit frontend |
 | `npm run tauri build` | Build full Tauri app (frontend + native binary) |
 | `npm test` | Run Vitest unit tests |
