@@ -9,7 +9,7 @@
 |-------|--------|-------|
 | -1 | COMPLETE | Docs written; agent files in `agents/` |
 | 0 | COMPLETE | Scaffold + toolchain verified |
-| 1 | PENDING | Skipped ahead to Phase 2 per manager request; must come back before Phase 3 needs `get_monitor_bounds`/click-through |
+| 1 | COMPLETE | Transparent window + monitor bounds + interactive regions (merged via PR #2) |
 | 2 | COMPLETE | Sprite sheets + rendering pipeline done |
 | 3–16 | PENDING | — |
 
@@ -26,6 +26,21 @@
 - Plugins registered: `tauri-plugin-store`, `tauri-plugin-autostart`, `tauri-plugin-notification`
 - Vitest configured with jsdom; `src/lib/` structure created
 - Sprite spec documented: 11 animations, 32×32 px frames, RGBA PNG
+
+## Phase 1 Agent Summary
+
+| Agent | Status | Verification |
+|-------|--------|--------------|
+| Backend Agent | COMPLETE | `cargo check` PASS |
+| Frontend Agent | COMPLETE | `npm run build` PASS |
+| UI Agent | N/A | No Phase 1 deliverables |
+
+## Phase 1 Key Outcomes
+- `tauri.conf.json`: transparent, decorations off, alwaysOnTop, skipTaskbar, not resizable
+- `lib.rs`: `set_ignore_cursor_events` + `get_monitor_bounds` commands registered
+- `+page.svelte`: calls `get_monitor_bounds` on mount, sizes canvas to primary monitor, stubs `updateInteractiveRegions()`
+- macOS: `alwaysOnTop` maps to `NSFloatingWindowLevel` via Tauri (no extra crate)
+- Windows: `.setup()` hook sets initial click-through; frontend toggles per region
 
 ## Phase 2 Agent Summary
 
@@ -46,19 +61,15 @@
 
 - All phase PRs target **`agents`** (not `main`)
 - `main` is touched only at Phase 16 (production release)
-- Per-phase pattern: create `worktree-phase-N` branch → do work → open PR → merge into `agents`
+- Per-phase pattern: create `worktree-phase-N` branch → do work → open PR → **merge into `agents` before starting the next phase's branch** (a Phase 1 PR sat open for two days while Phase 2 work began against the stale base — caused doc/merge conflicts; always confirm the prior phase's PR is merged first)
 - After merging, the repo root at `/Users/nikhilbabuguntipally/Developer/Pet/` reflects the latest dev state; run `npm run tauri dev` from there
 
 ## Decision Log
 - 2026-06-14: Scaffold used SvelteKit (not plain Svelte) — template `svelte-ts` resolves to SvelteKit. Shared code lives in `src/lib/` (imported via `$lib/`). No change needed; SvelteKit is compatible with the plan.
 - 2026-06-14: `@sveltejs/adapter-static` was already in scaffold; `fallback: 'index.html'` configured for Tauri.
-- 2026-06-16: Phase 2 was done before Phase 1 at the user's explicit request. Phase 1 (transparent overlay, `get_monitor_bounds`, click-through) remains pending and should be picked up before Phase 3's game loop needs real window/monitor data.
+- 2026-06-16: Phase 2 branch was started against `agents` before PR #2 (Phase 1) had been merged, so it briefly lacked Phase 1's window/monitor work. Resolved by merging PR #2 first, then merging `agents` back into the Phase 2 branch.
 - 2026-06-16: Sprite sheets generated programmatically (`@napi-rs/canvas`) rather than hand-drawn pixel art, since no art pipeline exists yet. `SPRITE_SPEC.md`'s sheet-dimension note (1344×352) assumed a single uniform-width strip; actual sheets are 192×352 (packed to `max(frameCount)` columns) since manifests already carry per-row `startCol`/`frameCount`. No spec or code mismatch — the manifest is what code reads.
 
 ## Next Phase
-**Phase 1 — Transparent Overlay Window** (still pending, recommended next)
-- Backend Agent: Configure `tauri.conf.json` window (transparent, decorations off, alwaysOnTop), macOS/Windows native setup, `set_ignore_cursor_events`, `get_monitor_bounds`
-- Frontend Agent: Call `get_monitor_bounds`, set canvas size, `updateInteractiveRegions()`, transparent CSS
-
-**Phase 3 — Game Loop & Pet Movement** (can start once Phase 1 lands)
-- Frontend Agent: `useGameLoop.js`, `petStore.js`; wire the Phase 2 `Renderer`/`Animator` into the real `requestAnimationFrame` loop
+**Phase 3 — Game Loop & Pet Movement**
+- Frontend Agent: `useGameLoop.js`, `petStore.js`; wire the Phase 2 `Renderer`/`Animator` into the real `requestAnimationFrame` loop and replace the placeholder pet bounds in `+page.svelte` with live position

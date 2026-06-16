@@ -4,13 +4,20 @@
 The Frontend Agent owns the Svelte app, Canvas renderer, game loop, AI/FSM, UI components, and Tauri IPC client.
 
 ## Current Phase
-**Phase 2 — COMPLETE** (Phase 1 frontend work — `updateInteractiveRegions`, monitor bounds wiring — still PENDING; Phase 2 was done out of order per manager request)
+**Phase 2 — COMPLETE**
 
 ## Phase 0 Deliverables ✓
 - [x] Vite configured: `clearScreen: false`, `server.strictPort: true`
 - [x] Vitest installed with jsdom environment (`vitest.config.js`)
 - [x] src/lib/ folder structure created: data, stores, components, canvas, ai, hooks, utils
 - [x] `src/routes/+page.svelte` wired as root with transparent-background canvas filling viewport
+- [x] `npm run build` passes
+
+## Phase 1 Deliverables ✓
+- [x] `onMount` calls `get_monitor_bounds`; canvas sized to primary monitor dimensions
+- [x] `isTauri()` guard on all `invoke` calls
+- [x] `updateInteractiveRegions()` implemented (stubs to `set_ignore_cursor_events(false)`; Phase 3 adds real bounding rect)
+- [x] Canvas: `position: fixed; top: 0; left: 0` anchors it to viewport origin
 - [x] `npm run build` passes
 
 ## Phase 2 Deliverables ✓
@@ -24,9 +31,9 @@ The Frontend Agent owns the Svelte app, Canvas renderer, game loop, AI/FSM, UI c
 - [x] Sprites are dual-published: `assets/sprites/` (canonical, UI-agent owned) is mirrored to `static/sprites/` (served at runtime by SvelteKit) by `scripts/generate-sprites.js`
 
 ## Key Files
-- `vite.config.js` — Tauri-compatible Vite config (already configured)
+- `vite.config.js` — Tauri-compatible Vite config
 - `vitest.config.js` — Vitest config with jsdom
-- `src/routes/+page.svelte` — root canvas page
+- `src/routes/+page.svelte` — root canvas page (monitor bounds + interactive regions)
 - `src/routes/+layout.ts` — SSR disabled, prerender enabled
 - `src/lib/` — all shared code (canvas, ai, stores, etc.)
 - `src/lib/canvas/spriteRasterizer.ts`, `animator.ts`, `renderer.ts` — Phase 2 rendering pipeline
@@ -35,8 +42,7 @@ The Frontend Agent owns the Svelte app, Canvas renderer, game loop, AI/FSM, UI c
 Uses **SvelteKit** (not plain Svelte). Import shared code via `$lib/...` alias pointing to `src/lib/`.
 
 ## Upcoming Phases
-- **Phase 1** (still pending): `updateInteractiveRegions()`, call `get_monitor_bounds`, transparent CSS
-- **Phase 3**: `src/lib/hooks/useGameLoop.js`, `src/lib/stores/petStore.js` — wire `Renderer`/`Animator` into the real game loop, replacing the temporary Phase 2 smoke test
+- **Phase 3**: `src/lib/hooks/useGameLoop.js`, `src/lib/stores/petStore.js` — wire `Renderer`/`Animator` into the real game loop, replacing the placeholder pet bounds in `+page.svelte`
 - **Phase 4**: `src/lib/ai/FSM.js`
 - **Phase 5**: `src/lib/ai/needs.js`, `src/lib/ai/UtilityAI.js`, `src/lib/hooks/usePetAI.js`
 
