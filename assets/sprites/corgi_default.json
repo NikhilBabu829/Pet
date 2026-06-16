@@ -1,0 +1,79 @@
+{
+  "idle": {
+    "row": 0,
+    "startCol": 0,
+    "frameCount": 4,
+    "fps": 8,
+    "loop": true
+  },
+  "walk": {
+    "row": 1,
+    "startCol": 0,
+    "frameCount": 6,
+    "fps": 8,
+    "loop": true
+  },
+  "run": {
+    "row": 2,
+    "startCol": 0,
+    "frameCount": 4,
+    "fps": 12,
+    "loop": true
+  },
+  "sit": {
+    "row": 3,
+    "startCol": 0,
+    "frameCount": 2,
+    "fps": 4,
+    "loop": true
+  },
+  "sleep": {
+    "row": 4,
+    "startCol": 0,
+    "frameCount": 3,
+    "fps": 4,
+    "loop": true
+  },
+  "pet": {
+    "row": 5,
+    "startCol": 0,
+    "frameCount": 4,
+    "fps": 8,
+    "loop": false
+  },
+  "type": {
+    "row": 6,
+    "startCol": 0,
+    "frameCount": 4,
+    "fps": 10,
+    "loop": true
+  },
+  "overheat": {
+    "row": 7,
+    "startCol": 0,
+    "frameCount": 4,
+    "fps": 12,
+    "loop": true
+  },
+  "mischief": {
+    "row": 8,
+    "startCol": 0,
+    "frameCount": 4,
+    "fps": 8,
+    "loop": true
+  },
+  "pomo_work": {
+    "row": 9,
+    "startCol": 0,
+    "frameCount": 4,
+    "fps": 8,
+    "loop": true
+  },
+  "pomo_break": {
+    "row": 10,
+    "startCol": 0,
+    "frameCount": 3,
+    "fps": 6,
+    "loop": true
+  }
+}
