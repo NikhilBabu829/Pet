@@ -1,7 +1,7 @@
 # Manager
 
 ## Current Sprint
-**Phase 0 — Scaffold & Toolchain — COMPLETE**
+**Phase 1 — Transparent Overlay Window — COMPLETE**
 
 ## Phase Status
 
@@ -9,7 +9,23 @@
 |-------|--------|-------|
 | -1 | COMPLETE | Docs written; agent files in `agents/` |
 | 0 | COMPLETE | Scaffold + toolchain verified |
-| 1–16 | PENDING | — |
+| 1 | COMPLETE | Transparent window + monitor bounds + interactive regions |
+| 2–16 | PENDING | — |
+
+## Phase 1 Agent Summary
+
+| Agent | Status | Verification |
+|-------|--------|--------------|
+| Backend Agent | COMPLETE | `cargo check` PASS |
+| Frontend Agent | COMPLETE | `npm run build` PASS |
+| UI Agent | N/A | No Phase 1 deliverables |
+
+## Phase 1 Key Outcomes
+- `tauri.conf.json`: transparent, decorations off, alwaysOnTop, skipTaskbar, not resizable
+- `lib.rs`: `set_ignore_cursor_events` + `get_monitor_bounds` commands registered
+- `+page.svelte`: calls `get_monitor_bounds` on mount, sizes canvas to primary monitor, stubs `updateInteractiveRegions()`
+- macOS: `alwaysOnTop` maps to `NSFloatingWindowLevel` via Tauri (no extra crate)
+- Windows: `.setup()` hook sets initial click-through; frontend toggles per region
 
 ## Phase 0 Agent Summary
 
@@ -37,6 +53,6 @@
 - 2026-06-14: `@sveltejs/adapter-static` was already in scaffold; `fallback: 'index.html'` configured for Tauri.
 
 ## Next Phase
-**Phase 1 — Transparent Overlay Window**
-- Backend Agent: Configure `tauri.conf.json` window (transparent, decorations off, alwaysOnTop), macOS/Windows native setup, `set_ignore_cursor_events`, `get_monitor_bounds`
-- Frontend Agent: Call `get_monitor_bounds`, set canvas size, `updateInteractiveRegions()`, transparent CSS
+**Phase 2 — Sprite & Rendering System**
+- UI Agent: Tabby cat + corgi dog sprite sheets + manifests in `assets/sprites/`
+- Frontend Agent: `spriteRasterizer.js`, `animator.js`, `renderer.js` in `src/lib/canvas/`

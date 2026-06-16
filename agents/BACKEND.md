@@ -13,12 +13,13 @@ src-tauri/capabilities/default.json
 ```
 
 ## Current Status
-Phase 0: COMPLETE
+Phase 1: COMPLETE
 
 ## Activity Log
 | Timestamp (UTC) | Task | Files Changed | Why |
 |-----------------|------|---------------|-----|
 | 2026-06-14 | Phase 0: Scaffold Tauri v2 + Svelte-TS project | src-tauri/Cargo.toml, src-tauri/src/lib.rs, src-tauri/capabilities/default.json | Initial project setup with plugins |
+| 2026-06-14 | Phase 1: Transparent window + monitor bounds commands | src-tauri/tauri.conf.json, src-tauri/src/lib.rs | Overlay window config + IPC commands |
 
 ## Completed Tasks
 
@@ -32,13 +33,23 @@ Phase 0: COMPLETE
 - Added plugin permissions to `src-tauri/capabilities/default.json`
 - `cargo check`: PASS (34.74s, finished dev profile cleanly)
 
+## Completed Tasks
+
+### Phase 1 — Transparent Overlay Window
+- `tauri.conf.json`: transparent, decorations off, alwaysOnTop, skipTaskbar, resizable false, 1920×1080 default
+- `lib.rs`: added `MonitorBounds` struct, `set_ignore_cursor_events` command, `get_monitor_bounds` command
+- `.setup()` hook: Windows-only initial click-through via `set_ignore_cursor_events(true)`
+- `cargo check`: PASS
+
 ## Pending Tasks
-(queue of upcoming work)
+(Phase 2 and beyond)
 
 ## Decisions & Constraints
 - Tauri v2 with SvelteKit (not plain Svelte) — template used `svelte-ts` which produces SvelteKit structure
 - Plugin init pattern for autostart: `MacosLauncher::LaunchAgent` with empty args vec
 - Capabilities use `store:default`, `autostart:default`, `notification:default`
+- macOS NSWindowLevel: `alwaysOnTop: true` uses Tauri's native `NSFloatingWindowLevel` — sufficient for Phase 1; revisit if above-fullscreen level needed
+- Windows click-through: Tauri's `set_ignore_cursor_events` internally calls `SetWindowLongPtrW(WS_EX_LAYERED | WS_EX_TRANSPARENT)` — no extra crate needed
 
 ## Cross-Agent Contracts
 **Produces for UI:**
