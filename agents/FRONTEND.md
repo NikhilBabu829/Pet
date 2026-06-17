@@ -53,9 +53,16 @@ The Frontend Agent owns the Svelte app, Canvas renderer, game loop, AI/FSM, UI c
 ## Framework Note
 Uses **SvelteKit** (not plain Svelte). Import shared code via `$lib/...` alias pointing to `src/lib/`.
 
+## Phase 5 Deliverables ✓
+- [x] `src/lib/ai/needs.ts` — `Needs` type (hunger/attention/energy/fun), `NeedDecayRates`, `createNeeds()`, `tickNeeds()` clamped to [0,1]
+- [x] `src/lib/ai/UtilityAI.ts` — `AiAction` enum, `scoreAction()` (urgency × multiplier + flat criticalBonus when critical), `pickAction()`, `ACTION_TO_FSM_EVENT` mapping
+- [x] `src/lib/data/behaviorProfiles.ts` — `LAZY_CAT_PROFILE`, `HYPERACTIVE_DOG_PROFILE`, `LAZY_CAT_RATES`, `HYPERACTIVE_DOG_RATES`
+- [x] `src/lib/hooks/usePetAI.ts` — `usePetAI(fsm, profile, rates)` with 3s cooldown, decays needs, scores + fires FSM transitions
+- [x] `+page.svelte` updated: random wander timer removed, `petAI.tick()` plugged into game loop
+- [x] `npm test` (77/77 pass), `npm run build` PASS
+
 ## Upcoming Phases
-- **Phase 4**: `src/lib/ai/FSM.ts` — finite state machine for pet behavior
-- **Phase 5**: `src/lib/ai/needs.ts`, `src/lib/ai/UtilityAI.ts`, `src/lib/hooks/usePetAI.ts`
+- **Phase 6**: `src/lib/hooks/useTauriCommands.ts` — Tauri IPC listeners for typing/mouse events; FSM transitions (TYPING, OVERHEATING, RUNNING flee, PETTING on click)
 
 ## Cross-Agent Contracts
 - **→ UI Agent**: Render requests for animation states and viewport/screen bounds

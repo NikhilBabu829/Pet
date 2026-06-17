@@ -1,0 +1,187 @@
+{
+  "meta": {
+    "name": "Comnyang-Style Pixel Dog",
+    "type": "modular_vector_pixel",
+    "base_grid": "16x16",
+    "scale_factor": 1,
+    "global_anchor": { "x": 8, "y": 16 }
+  },
+  "palette": {
+    "bg": "transparent",
+    "body_primary": "#E5A93C",
+    "body_secondary": "#C68421",
+    "belly": "#FFF3D1",
+    "eyes": "#111111",
+    "collar": "#E63946",
+    "nose": "#2B2D42"
+  },
+  "components": {
+    "shadow": {
+      "layer_order": 1,
+      "anchor": { "x": 8, "y": 15 },
+      "pixels": [
+        { "x": 4, "y": 15, "color": "rgba(0,0,0,0.15)" },
+        { "x": 5, "y": 15, "color": "rgba(0,0,0,0.2)" },
+        { "x": 6, "y": 15, "color": "rgba(0,0,0,0.2)" },
+        { "x": 7, "y": 15, "color": "rgba(0,0,0,0.2)" },
+        { "x": 8, "y": 15, "color": "rgba(0,0,0,0.2)" },
+        { "x": 9, "y": 15, "color": "rgba(0,0,0,0.2)" },
+        { "x": 10, "y": 15, "color": "rgba(0,0,0,0.2)" },
+        { "x": 11, "y": 15, "color": "rgba(0,0,0,0.15)" }
+      ]
+    },
+    "tail": {
+      "layer_order": 2,
+      "anchor": { "x": 3, "y": 12 },
+      "pixels": [
+        { "x": 3, "y": 12, "color": "body_secondary" },
+        { "x": 2, "y": 11, "color": "body_primary" },
+        { "x": 1, "y": 10, "color": "body_primary" },
+        { "x": 1, "y": 9, "color": "belly" }
+      ]
+    },
+    "body": {
+      "layer_order": 3,
+      "anchor": { "x": 8, "y": 12 },
+      "pixels": [
+        { "x": 4, "y": 12, "color": "body_secondary" },
+        { "x": 5, "y": 12, "color": "body_primary" },
+        { "x": 6, "y": 12, "color": "body_primary" },
+        { "x": 7, "y": 12, "color": "body_primary" },
+        { "x": 8, "y": 12, "color": "body_primary" },
+        { "x": 9, "y": 12, "color": "body_primary" },
+        { "x": 10, "y": 12, "color": "body_secondary" },
+        { "x": 4, "y": 13, "color": "body_secondary" },
+        { "x": 5, "y": 13, "color": "belly" },
+        { "x": 6, "y": 13, "color": "belly" },
+        { "x": 7, "y": 13, "color": "belly" },
+        { "x": 8, "y": 13, "color": "belly" },
+        { "x": 9, "y": 13, "color": "belly" },
+        { "x": 10, "y": 13, "color": "body_secondary" },
+        { "x": 5, "y": 14, "color": "collar" },
+        { "x": 6, "y": 14, "color": "collar" },
+        { "x": 7, "y": 14, "color": "collar" },
+        { "x": 8, "y": 14, "color": "collar" },
+        { "x": 9, "y": 14, "color": "collar" }
+      ]
+    },
+    "legs": {
+      "layer_order": 4,
+      "anchor": { "x": 8, "y": 14 },
+      "pixels": [
+        { "x": 4, "y": 14, "color": "body_secondary" },
+        { "x": 5, "y": 15, "color": "body_secondary" },
+        { "x": 9, "y": 14, "color": "body_secondary" },
+        { "x": 10, "y": 15, "color": "body_secondary" }
+      ]
+    },
+    "head": {
+      "layer_order": 5,
+      "anchor": { "x": 7, "y": 10 },
+      "pixels": [
+        { "x": 5, "y": 7, "color": "body_primary" },
+        { "x": 6, "y": 7, "color": "body_primary" },
+        { "x": 7, "y": 7, "color": "body_primary" },
+        { "x": 8, "y": 7, "color": "body_primary" },
+        { "x": 9, "y": 7, "color": "body_primary" },
+        { "x": 4, "y": 8, "color": "body_primary" },
+        { "x": 5, "y": 8, "color": "body_primary" },
+        { "x": 6, "y": 8, "color": "body_primary" },
+        { "x": 7, "y": 8, "color": "body_primary" },
+        { "x": 8, "y": 8, "color": "body_primary" },
+        { "x": 9, "y": 8, "color": "body_primary" },
+        { "x": 10, "y": 8, "color": "body_primary" },
+        { "x": 4, "y": 9, "color": "body_primary" },
+        { "x": 5, "y": 9, "color": "eyes" },
+        { "x": 6, "y": 9, "color": "body_primary" },
+        { "x": 7, "y": 9, "color": "body_primary" },
+        { "x": 8, "y": 9, "color": "body_primary" },
+        { "x": 9, "y": 9, "color": "eyes" },
+        { "x": 10, "y": 9, "color": "body_primary" },
+        { "x": 5, "y": 10, "color": "body_primary" },
+        { "x": 6, "y": 10, "color": "belly" },
+        { "x": 7, "y": 10, "color": "nose" },
+        { "x": 8, "y": 10, "color": "belly" },
+        { "x": 9, "y": 10, "color": "body_primary" }
+      ]
+    },
+    "ears": {
+      "layer_order": 6,
+      "anchor": { "x": 7, "y": 6 },
+      "pixels": [
+        { "x": 4, "y": 6, "color": "body_secondary" },
+        { "x": 10, "y": 6, "color": "body_secondary" },
+        { "x": 3, "y": 7, "color": "body_secondary" },
+        { "x": 11, "y": 7, "color": "body_secondary" }
+      ]
+    }
+  },
+  "animations": {
+    "idle": {
+      "fps": 8,
+      "loop": true,
+      "frameCount": 4,
+      "frames": [null, null, null, null]
+    },
+    "walk": {
+      "fps": 8,
+      "loop": true,
+      "frameCount": 6,
+      "frames": [null, null, null, null, null, null]
+    },
+    "run": {
+      "fps": 12,
+      "loop": true,
+      "frameCount": 4,
+      "frames": [null, null, null, null]
+    },
+    "sit": {
+      "fps": 4,
+      "loop": true,
+      "frameCount": 2,
+      "frames": [null, null]
+    },
+    "sleep": {
+      "fps": 4,
+      "loop": true,
+      "frameCount": 3,
+      "frames": [null, null, null]
+    },
+    "pet": {
+      "fps": 8,
+      "loop": false,
+      "frameCount": 4,
+      "frames": [null, null, null, null]
+    },
+    "type": {
+      "fps": 10,
+      "loop": true,
+      "frameCount": 4,
+      "frames": [null, null, null, null]
+    },
+    "overheat": {
+      "fps": 12,
+      "loop": true,
+      "frameCount": 4,
+      "frames": [null, null, null, null]
+    },
+    "mischief": {
+      "fps": 8,
+      "loop": true,
+      "frameCount": 4,
+      "frames": [null, null, null, null]
+    },
+    "pomo_work": {
+      "fps": 8,
+      "loop": true,
+      "frameCount": 4,
+      "frames": [null, null, null, null]
+    },
+    "pomo_break": {
+      "fps": 6,
+      "loop": true,
+      "frameCount": 3,
+      "frames": [null, null, null]
+    }
+  }
+}

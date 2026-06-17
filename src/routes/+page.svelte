@@ -2,11 +2,14 @@
   import { onMount, onDestroy } from 'svelte';
   import { invoke } from '@tauri-apps/api/core';
   import { Renderer } from '$lib/canvas/renderer';
-  import { Animator, } from '$lib/canvas/animator';
-  import { loadSpriteSheet, FRAME_SIZE } from '$lib/canvas/spriteRasterizer';
-  import type { SpriteManifest } from '$lib/canvas/spriteRasterizer';
-  import { petStore, tickPet, scheduleWander } from '$lib/stores/petStore.svelte';
+  import { Animator } from '$lib/canvas/animator';
+  import { loadMvpSprite, extractAnimManifest } from '$lib/canvas/mvpRenderer';
+  import { FRAME_SIZE } from '$lib/canvas/spriteRasterizer';
+  import { petStore, tickPet } from '$lib/stores/petStore.svelte';
   import { useGameLoop } from '$lib/hooks/useGameLoop';
+  import { FSM, FsmState, FsmEvent } from '$lib/ai/FSM';
+  import { usePetAI } from '$lib/hooks/usePetAI';
+  import { HYPERACTIVE_DOG_PROFILE, HYPERACTIVE_DOG_RATES } from '$lib/data/behaviorProfiles';
 
   const isTauri = () =>
     typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window;
@@ -17,7 +20,7 @@
   let canvasEl = $state<HTMLCanvasElement | null>(null);
 
   let stopLoop: (() => void) | null = null;
-  let cleanupWander: (() => void) | null = null;
+  let wanderTargetX = 100;
 
   async function updateInteractiveRegions() {
     if (!isTauri()) return;
@@ -28,39 +31,76 @@
   }
 
   onMount(async () => {
-    let primaryMonitor = { width: 1920, height: 1080 };
-
     if (isTauri()) {
-      const monitors = await invoke<Array<{ x: number; y: number; width: number; height: number }>>(
+      // get_monitor_bounds returns physical pixels; we only use it to confirm
+      // a monitor exists. Actual sizing uses logical pixels (window.inner*)
+      // so canvas coordinates match CSS and nothing overflows on HiDPI displays.
+      await invoke<Array<{ x: number; y: number; width: number; height: number }>>(
         'get_monitor_bounds'
       );
-      if (monitors.length > 0) {
-        primaryMonitor = monitors[0];
-        canvasWidth = primaryMonitor.width;
-        canvasHeight = primaryMonitor.height;
-      }
     }
 
-    petStore.monitorW = primaryMonitor.width;
-    petStore.monitorH = primaryMonitor.height;
+    // Always size to the logical viewport — matches CSS 100vw/100vh exactly
+    canvasWidth  = window.innerWidth;
+    canvasHeight = window.innerHeight;
+    petStore.monitorW = canvasWidth;
+    petStore.monitorH = canvasHeight;
 
     if (!canvasEl) return;
 
-    const bitmap = await loadSpriteSheet('/sprites/tabby_cat_default.png');
-    const manifest: SpriteManifest = await fetch('/sprites/tabby_cat_default.json').then(r => r.json());
+    // Load dog MVP sprite
+    const mvpDef = await loadMvpSprite('/sprites/dog.json');
+    const animManifest = extractAnimManifest(mvpDef);
 
-    const renderer = new Renderer(canvasEl, bitmap, manifest);
+    const renderer = Renderer.fromMvp(canvasEl, mvpDef);
     renderer.resize(canvasWidth, canvasHeight);
 
-    const animator = new Animator(manifest);
+    const animator = new Animator(animManifest);
 
-    cleanupWander = scheduleWander();
+    // Create FSM with velocity callbacks
+    const fsm = new FSM(FsmState.IDLE, {
+      onEnter(state) {
+        switch (state) {
+          case FsmState.WALKING: {
+            const petW = FRAME_SIZE * 2;
+            const targetX = Math.random() * (petStore.monitorW - petW);
+            wanderTargetX = targetX;
+            petStore.vx = targetX > petStore.x ? 60 : -60;
+            petStore.facing = petStore.vx > 0 ? 'right' : 'left';
+            break;
+          }
+          case FsmState.RUNNING:
+            petStore.vx = petStore.facing === 'right' ? 160 : -160;
+            break;
+          default:
+            petStore.vx = 0;
+        }
+      },
+    });
+
+    const petAI = usePetAI(fsm, HYPERACTIVE_DOG_PROFILE, HYPERACTIVE_DOG_RATES);
 
     const { startLoop, stopLoop: stop } = useGameLoop((deltaMs) => {
+      petAI.tick(deltaMs);
       tickPet(deltaMs);
-      animator.setAnimation(petStore.animState);
+
+      // ARRIVE detection — within one frame's travel of target
+      if (fsm.currentState === FsmState.WALKING && fsm.canTransition(FsmEvent.ARRIVE)) {
+        const step = Math.abs(petStore.vx) * (deltaMs / 1000) + 1;
+        if (Math.abs(petStore.x - wanderTargetX) < step) {
+          fsm.transition(FsmEvent.ARRIVE);
+        }
+      }
+
+      // One-shot PETTING completion
+      if (fsm.currentState === FsmState.PETTING && animator.isDone) {
+        fsm.transition(FsmEvent.ANIM_DONE);
+      }
+
+      const animName = fsm.getAnimation();
+      animator.setAnimation(animName);
       const frameIndex = animator.tick(deltaMs);
-      renderer.draw(petStore.x, petStore.y, frameIndex, petStore.animState, petStore.facing);
+      renderer.draw(petStore.x, petStore.y, frameIndex, animName, petStore.facing);
     });
 
     stopLoop = stop;
@@ -71,7 +111,6 @@
 
   onDestroy(() => {
     stopLoop?.();
-    cleanupWander?.();
   });
 </script>
 
