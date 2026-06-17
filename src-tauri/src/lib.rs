@@ -1,9 +1,20 @@
+mod input_hooks;
+
+use input_hooks::SharedState;
+
 #[derive(serde::Serialize)]
 struct MonitorBounds {
     x: i32,
     y: i32,
     width: u32,
     height: u32,
+}
+
+#[derive(serde::Serialize)]
+struct ActivitySnapshot {
+    wpm: u32,
+    mouse_speed: f64,
+    is_typing: bool,
 }
 
 #[tauri::command]
@@ -35,11 +46,26 @@ fn get_monitor_bounds(app: tauri::AppHandle) -> Result<Vec<MonitorBounds>, Strin
         .map_err(|e| e.to_string())
 }
 
+#[tauri::command]
+fn get_activity_snapshot(state: tauri::State<SharedState>) -> ActivitySnapshot {
+    let s = state.lock().unwrap();
+    ActivitySnapshot {
+        wpm: s.wpm,
+        mouse_speed: s.mouse_speed,
+        is_typing: s.is_typing,
+    }
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .setup(|app| {
             use tauri::Manager;
+
+            // Start global keyboard/mouse hooks in background threads
+            let shared_state = input_hooks::start(app.handle().clone());
+            app.manage(shared_state);
+
             if let Some(window) = app.get_webview_window("main") {
                 // Size the window to the primary monitor's LOGICAL pixel dimensions so it
                 // never overflows on HiDPI/Retina displays (physical px / scale_factor = logical px).
@@ -73,7 +99,8 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             greet,
             set_ignore_cursor_events,
-            get_monitor_bounds
+            get_monitor_bounds,
+            get_activity_snapshot
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
