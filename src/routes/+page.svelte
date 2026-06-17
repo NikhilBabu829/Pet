@@ -8,6 +8,8 @@
   import { petStore, tickPet } from '$lib/stores/petStore.svelte';
   import { useGameLoop } from '$lib/hooks/useGameLoop';
   import { FSM, FsmState, FsmEvent } from '$lib/ai/FSM';
+  import { usePetAI } from '$lib/hooks/usePetAI';
+  import { HYPERACTIVE_DOG_PROFILE, HYPERACTIVE_DOG_RATES } from '$lib/data/behaviorProfiles';
 
   const isTauri = () =>
     typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window;
@@ -18,7 +20,6 @@
   let canvasEl = $state<HTMLCanvasElement | null>(null);
 
   let stopLoop: (() => void) | null = null;
-  let wanderTimerId: ReturnType<typeof setTimeout> | null = null;
   let wanderTargetX = 100;
 
   async function updateInteractiveRegions() {
@@ -27,16 +28,6 @@
       ignore: false,
       rect: { x: petStore.x, y: petStore.y, width: FRAME_SIZE * 2, height: FRAME_SIZE * 2 },
     });
-  }
-
-  function scheduleNextWander(fsm: FSM) {
-    const delayMs = 4000 + Math.random() * 4000;
-    wanderTimerId = setTimeout(() => {
-      if (fsm.canTransition(FsmEvent.WANDER)) {
-        fsm.transition(FsmEvent.WANDER);
-      }
-      scheduleNextWander(fsm);
-    }, delayMs);
   }
 
   onMount(async () => {
@@ -88,9 +79,10 @@
       },
     });
 
-    scheduleNextWander(fsm);
+    const petAI = usePetAI(fsm, HYPERACTIVE_DOG_PROFILE, HYPERACTIVE_DOG_RATES);
 
     const { startLoop, stopLoop: stop } = useGameLoop((deltaMs) => {
+      petAI.tick(deltaMs);
       tickPet(deltaMs);
 
       // ARRIVE detection — within one frame's travel of target
@@ -120,9 +112,6 @@
 
   onDestroy(() => {
     stopLoop?.();
-    if (wanderTimerId) {
-      clearTimeout(wanderTimerId);
-    }
   });
 </script>
 
