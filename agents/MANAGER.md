@@ -12,7 +12,7 @@
 | 1 | COMPLETE | Transparent window + monitor bounds + interactive regions (merged via PR #2) |
 | 2 | COMPLETE | Sprite sheets + rendering pipeline done |
 | 3 | COMPLETE | Game loop + pet physics + wander timer (merged via PR #4) |
-| 4 | COMPLETE | Finite State Machine + MVP dog sprite (committed to agents) |
+| 4 | COMPLETE | FSM + MVP dog sprite; animation frames backfilled via PR #7 (worktree-phase-4-anim → agents) |
 | 5 | COMPLETE | Utility AI + Needs + behavior profiles (merged via PR #5) |
 | 6 | COMPLETE | Input Reactivity — keyboard hook, mouse tracking, IPC listeners (worktree-phase-6 → agents, PR #6) |
 | 7–16 | PENDING | — |
