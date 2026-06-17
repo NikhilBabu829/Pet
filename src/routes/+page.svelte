@@ -5,7 +5,7 @@
   import { Animator, } from '$lib/canvas/animator';
   import { loadSpriteSheet, FRAME_SIZE } from '$lib/canvas/spriteRasterizer';
   import type { SpriteManifest } from '$lib/canvas/spriteRasterizer';
-  import { petStore, tickPet, scheduleWander } from '$lib/stores/petStore';
+  import { petStore, tickPet, scheduleWander } from '$lib/stores/petStore.svelte';
   import { useGameLoop } from '$lib/hooks/useGameLoop';
 
   const isTauri = () =>
