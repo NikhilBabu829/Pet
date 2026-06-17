@@ -82,9 +82,18 @@
 
     const petAI = usePetAI(fsm, HYPERACTIVE_DOG_PROFILE, HYPERACTIVE_DOG_RATES);
 
+    let regionUpdateMs = 0;
+
     const { startLoop, stopLoop: stop } = useGameLoop((deltaMs) => {
       petAI.tick(deltaMs);
       tickPet(deltaMs);
+
+      // Re-sync click-through punch-hole at 10 Hz so it tracks the pet as it moves
+      regionUpdateMs += deltaMs;
+      if (regionUpdateMs >= 100) {
+        regionUpdateMs = 0;
+        updateInteractiveRegions();
+      }
 
       // ARRIVE detection — within one frame's travel of target
       if (fsm.currentState === FsmState.WALKING && fsm.canTransition(FsmEvent.ARRIVE)) {
