@@ -13,8 +13,9 @@
 | 2 | COMPLETE | Sprite sheets + rendering pipeline done |
 | 3 | COMPLETE | Game loop + pet physics + wander timer (merged via PR #4) |
 | 4 | COMPLETE | Finite State Machine + MVP dog sprite (committed to agents) |
-| 5 | COMPLETE | Utility AI + Needs + behavior profiles (worktree-phase-5 → agents pending PR) |
-| 6–16 | PENDING | — |
+| 5 | COMPLETE | Utility AI + Needs + behavior profiles (merged via PR #5) |
+| 6 | COMPLETE | Input Reactivity — keyboard hook, mouse tracking, IPC listeners (worktree-phase-6 → agents, PR #6) |
+| 7–16 | PENDING | — |
 
 ## Phase 0 Agent Summary
 
@@ -120,7 +121,21 @@
 - `src/lib/hooks/usePetAI.ts`: `usePetAI(fsm, profile, rates)` — each tick decays needs, scores actions, fires FSM event when cooldown (3s) expires and canTransition
 - `src/routes/+page.svelte`: random wander timer removed; `petAI.tick(deltaMs)` drives behavior from game loop; `HYPERACTIVE_DOG_PROFILE` active
 
+## Phase 6 Agent Summary
+
+| Agent | Status | Verification |
+|-------|--------|--------------|
+| Backend Agent | COMPLETE | `cargo check` PASS |
+| Frontend Agent | COMPLETE | `npm test` (95/95 pass), `npm run build` PASS |
+| UI Agent | N/A | No Phase 6 deliverables |
+
+## Phase 6 Key Outcomes
+- `src-tauri/src/input_hooks.rs`: `rdev 0.5` cross-platform hook; Thread 1 captures `KeyPress`/`MouseMove` events, emits `mouse-move` at ~30 Hz; Thread 2 emits `typing-update { wpm, active }` at 1 Hz; WPM = keystrokes × 12 (proxy for speed); degrades gracefully if Accessibility permission missing
+- `lib.rs`: registers `input_hooks` module, manages `SharedState`, adds `get_activity_snapshot` command
+- `src/lib/hooks/useTauriCommands.ts`: `typing-update` → TYPING/OVERHEATING/cool-down; `mouse-move` → flee (SPEED_UP/SLOW_DOWN with direction set); canvas click → PET; idle timer (30s boosts attention decay, 2min → MISCHIEF_START); all listeners cleaned up in `destroy()`
+- 18 new unit tests for pure helpers; total 95/95
+
 ## Next Phase
-**Phase 6 — Input Reactivity**
-- Backend Agent: global keyboard hook (CGEventTap / WH_KEYBOARD_LL), mouse tracking, `get_activity_snapshot()` command
-- Frontend Agent: `useTauriCommands.ts` — listen to `typing-update` / `mouse-move` events; FSM transitions for typing, overheating, flee, petting; idle timer
+**Phase 7 — Window Manipulation (Mischief Mode)**
+- Backend Agent: idle timer in Rust, window enumeration (CGWindowList / EnumWindows), window push + resize via Accessibility API / SetWindowPos; `enable_mischief`, `disable_mischief`, `check_accessibility_permission` commands
+- Frontend Agent: accessibility permission prompt on macOS; mischief settings toggle; FSM MISCHIEF state integration

@@ -121,67 +121,771 @@
       "fps": 8,
       "loop": true,
       "frameCount": 4,
-      "frames": [null, null, null, null]
+      "frames": [
+        null,
+        {
+          "tail": {
+            "layer_order": 2,
+            "anchor": { "x": 3, "y": 12 },
+            "pixels": [
+              { "x": 3, "y": 12, "color": "body_secondary" },
+              { "x": 2, "y": 11, "color": "body_primary" },
+              { "x": 1, "y": 10, "color": "body_primary" },
+              { "x": 1, "y": 8, "color": "belly" }
+            ]
+          }
+        },
+        null,
+        {
+          "tail": {
+            "layer_order": 2,
+            "anchor": { "x": 3, "y": 12 },
+            "pixels": [
+              { "x": 3, "y": 12, "color": "body_secondary" },
+              { "x": 2, "y": 11, "color": "body_primary" },
+              { "x": 1, "y": 10, "color": "body_primary" },
+              { "x": 1, "y": 10, "color": "belly" }
+            ]
+          }
+        }
+      ]
     },
     "walk": {
       "fps": 8,
       "loop": true,
       "frameCount": 6,
-      "frames": [null, null, null, null, null, null]
+      "frames": [
+        null,
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 14, "color": "body_secondary" },
+              { "x": 5, "y": 14, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 14, "color": "body_secondary" }
+            ]
+          }
+        },
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 14, "color": "body_secondary" },
+              { "x": 5, "y": 15, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 15, "color": "body_secondary" }
+            ]
+          }
+        },
+        null,
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 14, "color": "body_secondary" },
+              { "x": 5, "y": 14, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 14, "color": "body_secondary" }
+            ]
+          }
+        },
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 14, "color": "body_secondary" },
+              { "x": 5, "y": 15, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 15, "color": "body_secondary" }
+            ]
+          }
+        }
+      ]
     },
     "run": {
       "fps": 12,
       "loop": true,
       "frameCount": 4,
-      "frames": [null, null, null, null]
+      "frames": [
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 14, "color": "body_secondary" },
+              { "x": 5, "y": 14, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 14, "color": "body_secondary" }
+            ]
+          }
+        },
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 14, "color": "body_secondary" },
+              { "x": 5, "y": 15, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 14, "color": "body_secondary" }
+            ]
+          }
+        },
+        null,
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 14, "color": "body_secondary" },
+              { "x": 5, "y": 14, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 13, "color": "body_secondary" }
+            ]
+          }
+        }
+      ]
     },
     "sit": {
       "fps": 4,
       "loop": true,
       "frameCount": 2,
-      "frames": [null, null]
+      "frames": [
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 5, "y": 14, "color": "body_secondary" },
+              { "x": 6, "y": 15, "color": "body_secondary" },
+              { "x": 8, "y": 14, "color": "body_secondary" },
+              { "x": 9, "y": 15, "color": "body_secondary" }
+            ]
+          }
+        },
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 5, "y": 14, "color": "body_secondary" },
+              { "x": 6, "y": 15, "color": "body_secondary" },
+              { "x": 8, "y": 14, "color": "body_secondary" },
+              { "x": 9, "y": 15, "color": "body_secondary" }
+            ]
+          },
+          "tail": {
+            "layer_order": 2,
+            "anchor": { "x": 3, "y": 12 },
+            "pixels": [
+              { "x": 3, "y": 13, "color": "body_secondary" },
+              { "x": 4, "y": 14, "color": "body_primary" },
+              { "x": 5, "y": 14, "color": "belly" }
+            ]
+          }
+        }
+      ]
     },
     "sleep": {
       "fps": 4,
       "loop": true,
       "frameCount": 3,
-      "frames": [null, null, null]
+      "frames": [
+        {
+          "head": {
+            "layer_order": 5,
+            "anchor": { "x": 7, "y": 10 },
+            "pixels": [
+              { "x": 5, "y": 7, "color": "body_primary" },
+              { "x": 6, "y": 7, "color": "body_primary" },
+              { "x": 7, "y": 7, "color": "body_primary" },
+              { "x": 8, "y": 7, "color": "body_primary" },
+              { "x": 9, "y": 7, "color": "body_primary" },
+              { "x": 4, "y": 8, "color": "body_primary" },
+              { "x": 5, "y": 8, "color": "body_primary" },
+              { "x": 6, "y": 8, "color": "body_primary" },
+              { "x": 7, "y": 8, "color": "body_primary" },
+              { "x": 8, "y": 8, "color": "body_primary" },
+              { "x": 9, "y": 8, "color": "body_primary" },
+              { "x": 10, "y": 8, "color": "body_primary" },
+              { "x": 4, "y": 9, "color": "body_primary" },
+              { "x": 5, "y": 9, "color": "#333333" },
+              { "x": 6, "y": 9, "color": "body_primary" },
+              { "x": 7, "y": 9, "color": "body_primary" },
+              { "x": 8, "y": 9, "color": "body_primary" },
+              { "x": 9, "y": 9, "color": "#333333" },
+              { "x": 10, "y": 9, "color": "body_primary" },
+              { "x": 5, "y": 10, "color": "body_primary" },
+              { "x": 6, "y": 10, "color": "belly" },
+              { "x": 7, "y": 10, "color": "nose" },
+              { "x": 8, "y": 10, "color": "belly" },
+              { "x": 9, "y": 10, "color": "body_primary" }
+            ]
+          },
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 5, "y": 14, "color": "body_secondary" },
+              { "x": 6, "y": 15, "color": "body_secondary" },
+              { "x": 8, "y": 14, "color": "body_secondary" },
+              { "x": 9, "y": 15, "color": "body_secondary" }
+            ]
+          }
+        },
+        {
+          "head": {
+            "layer_order": 5,
+            "anchor": { "x": 7, "y": 10 },
+            "pixels": [
+              { "x": 5, "y": 7, "color": "body_primary" },
+              { "x": 6, "y": 7, "color": "body_primary" },
+              { "x": 7, "y": 7, "color": "body_primary" },
+              { "x": 8, "y": 7, "color": "body_primary" },
+              { "x": 9, "y": 7, "color": "body_primary" },
+              { "x": 4, "y": 8, "color": "body_primary" },
+              { "x": 5, "y": 8, "color": "body_primary" },
+              { "x": 6, "y": 8, "color": "body_primary" },
+              { "x": 7, "y": 8, "color": "body_primary" },
+              { "x": 8, "y": 8, "color": "body_primary" },
+              { "x": 9, "y": 8, "color": "body_primary" },
+              { "x": 10, "y": 8, "color": "body_primary" },
+              { "x": 4, "y": 9, "color": "body_primary" },
+              { "x": 5, "y": 9, "color": "#333333" },
+              { "x": 6, "y": 9, "color": "body_primary" },
+              { "x": 7, "y": 9, "color": "body_primary" },
+              { "x": 8, "y": 9, "color": "body_primary" },
+              { "x": 9, "y": 9, "color": "#333333" },
+              { "x": 10, "y": 9, "color": "body_primary" },
+              { "x": 5, "y": 10, "color": "body_primary" },
+              { "x": 6, "y": 10, "color": "belly" },
+              { "x": 7, "y": 10, "color": "nose" },
+              { "x": 8, "y": 10, "color": "belly" },
+              { "x": 9, "y": 10, "color": "body_primary" }
+            ]
+          },
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 5, "y": 14, "color": "body_secondary" },
+              { "x": 6, "y": 15, "color": "body_secondary" },
+              { "x": 8, "y": 14, "color": "body_secondary" },
+              { "x": 9, "y": 15, "color": "body_secondary" }
+            ]
+          },
+          "tail": {
+            "layer_order": 2,
+            "anchor": { "x": 3, "y": 12 },
+            "pixels": [
+              { "x": 3, "y": 12, "color": "body_secondary" },
+              { "x": 2, "y": 12, "color": "body_primary" },
+              { "x": 1, "y": 12, "color": "belly" }
+            ]
+          }
+        },
+        {
+          "head": {
+            "layer_order": 5,
+            "anchor": { "x": 7, "y": 10 },
+            "pixels": [
+              { "x": 5, "y": 7, "color": "body_primary" },
+              { "x": 6, "y": 7, "color": "body_primary" },
+              { "x": 7, "y": 7, "color": "body_primary" },
+              { "x": 8, "y": 7, "color": "body_primary" },
+              { "x": 9, "y": 7, "color": "body_primary" },
+              { "x": 4, "y": 8, "color": "body_primary" },
+              { "x": 5, "y": 8, "color": "body_primary" },
+              { "x": 6, "y": 8, "color": "body_primary" },
+              { "x": 7, "y": 8, "color": "body_primary" },
+              { "x": 8, "y": 8, "color": "body_primary" },
+              { "x": 9, "y": 8, "color": "body_primary" },
+              { "x": 10, "y": 8, "color": "body_primary" },
+              { "x": 4, "y": 9, "color": "body_primary" },
+              { "x": 5, "y": 9, "color": "#333333" },
+              { "x": 6, "y": 9, "color": "body_primary" },
+              { "x": 7, "y": 9, "color": "body_primary" },
+              { "x": 8, "y": 9, "color": "body_primary" },
+              { "x": 9, "y": 9, "color": "#333333" },
+              { "x": 10, "y": 9, "color": "body_primary" },
+              { "x": 5, "y": 10, "color": "body_primary" },
+              { "x": 6, "y": 10, "color": "belly" },
+              { "x": 7, "y": 10, "color": "nose" },
+              { "x": 8, "y": 10, "color": "belly" },
+              { "x": 9, "y": 10, "color": "body_primary" }
+            ]
+          },
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 5, "y": 14, "color": "body_secondary" },
+              { "x": 6, "y": 15, "color": "body_secondary" },
+              { "x": 8, "y": 14, "color": "body_secondary" },
+              { "x": 9, "y": 15, "color": "body_secondary" }
+            ]
+          }
+        }
+      ]
     },
     "pet": {
       "fps": 8,
       "loop": false,
       "frameCount": 4,
-      "frames": [null, null, null, null]
+      "frames": [
+        {
+          "tail": {
+            "layer_order": 2,
+            "anchor": { "x": 3, "y": 12 },
+            "pixels": [
+              { "x": 3, "y": 12, "color": "body_secondary" },
+              { "x": 2, "y": 11, "color": "body_primary" },
+              { "x": 2, "y": 9, "color": "body_primary" },
+              { "x": 1, "y": 8, "color": "body_primary" },
+              { "x": 1, "y": 7, "color": "belly" }
+            ]
+          }
+        },
+        {
+          "head": {
+            "layer_order": 5,
+            "anchor": { "x": 7, "y": 10 },
+            "pixels": [
+              { "x": 5, "y": 7, "color": "body_primary" },
+              { "x": 6, "y": 7, "color": "body_primary" },
+              { "x": 7, "y": 7, "color": "body_primary" },
+              { "x": 8, "y": 7, "color": "body_primary" },
+              { "x": 9, "y": 7, "color": "body_primary" },
+              { "x": 4, "y": 8, "color": "body_primary" },
+              { "x": 5, "y": 8, "color": "body_primary" },
+              { "x": 6, "y": 8, "color": "body_primary" },
+              { "x": 7, "y": 8, "color": "body_primary" },
+              { "x": 8, "y": 8, "color": "body_primary" },
+              { "x": 9, "y": 8, "color": "body_primary" },
+              { "x": 10, "y": 8, "color": "body_primary" },
+              { "x": 4, "y": 9, "color": "body_primary" },
+              { "x": 6, "y": 9, "color": "body_primary" },
+              { "x": 7, "y": 9, "color": "body_primary" },
+              { "x": 8, "y": 9, "color": "body_primary" },
+              { "x": 10, "y": 9, "color": "body_primary" },
+              { "x": 5, "y": 10, "color": "body_primary" },
+              { "x": 5, "y": 10, "color": "eyes" },
+              { "x": 6, "y": 10, "color": "belly" },
+              { "x": 7, "y": 10, "color": "nose" },
+              { "x": 8, "y": 10, "color": "belly" },
+              { "x": 9, "y": 10, "color": "eyes" },
+              { "x": 9, "y": 10, "color": "body_primary" }
+            ]
+          }
+        },
+        {
+          "tail": {
+            "layer_order": 2,
+            "anchor": { "x": 3, "y": 12 },
+            "pixels": [
+              { "x": 3, "y": 12, "color": "body_secondary" },
+              { "x": 2, "y": 11, "color": "body_primary" },
+              { "x": 2, "y": 9, "color": "body_primary" },
+              { "x": 1, "y": 8, "color": "body_primary" },
+              { "x": 1, "y": 7, "color": "belly" }
+            ]
+          }
+        },
+        null
+      ]
     },
     "type": {
       "fps": 10,
       "loop": true,
       "frameCount": 4,
-      "frames": [null, null, null, null]
+      "frames": [
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 12, "color": "body_secondary" },
+              { "x": 5, "y": 12, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 15, "color": "body_secondary" }
+            ]
+          }
+        },
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 13, "color": "body_secondary" },
+              { "x": 5, "y": 13, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 15, "color": "body_secondary" }
+            ]
+          }
+        },
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 12, "color": "body_secondary" },
+              { "x": 5, "y": 12, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 15, "color": "body_secondary" }
+            ]
+          }
+        },
+        {
+          "head": {
+            "layer_order": 5,
+            "anchor": { "x": 7, "y": 10 },
+            "pixels": [
+              { "x": 5, "y": 8, "color": "body_primary" },
+              { "x": 6, "y": 8, "color": "body_primary" },
+              { "x": 7, "y": 8, "color": "body_primary" },
+              { "x": 8, "y": 8, "color": "body_primary" },
+              { "x": 9, "y": 8, "color": "body_primary" },
+              { "x": 4, "y": 9, "color": "body_primary" },
+              { "x": 5, "y": 9, "color": "body_primary" },
+              { "x": 6, "y": 9, "color": "body_primary" },
+              { "x": 7, "y": 9, "color": "body_primary" },
+              { "x": 8, "y": 9, "color": "body_primary" },
+              { "x": 9, "y": 9, "color": "body_primary" },
+              { "x": 10, "y": 9, "color": "body_primary" },
+              { "x": 4, "y": 10, "color": "body_primary" },
+              { "x": 5, "y": 10, "color": "eyes" },
+              { "x": 6, "y": 10, "color": "body_primary" },
+              { "x": 7, "y": 10, "color": "body_primary" },
+              { "x": 8, "y": 10, "color": "body_primary" },
+              { "x": 9, "y": 10, "color": "eyes" },
+              { "x": 10, "y": 10, "color": "body_primary" },
+              { "x": 5, "y": 11, "color": "body_primary" },
+              { "x": 6, "y": 11, "color": "belly" },
+              { "x": 7, "y": 11, "color": "nose" },
+              { "x": 8, "y": 11, "color": "belly" },
+              { "x": 9, "y": 11, "color": "body_primary" }
+            ]
+          },
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 12, "color": "body_secondary" },
+              { "x": 5, "y": 12, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 15, "color": "body_secondary" }
+            ]
+          }
+        }
+      ]
     },
     "overheat": {
       "fps": 12,
       "loop": true,
       "frameCount": 4,
-      "frames": [null, null, null, null]
+      "frames": [
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 3, "y": 14, "color": "body_secondary" },
+              { "x": 4, "y": 15, "color": "body_secondary" },
+              { "x": 8, "y": 14, "color": "body_secondary" },
+              { "x": 9, "y": 15, "color": "body_secondary" }
+            ]
+          },
+          "head": {
+            "layer_order": 5,
+            "anchor": { "x": 7, "y": 10 },
+            "pixels": [
+              { "x": 5, "y": 7, "color": "body_primary" },
+              { "x": 6, "y": 7, "color": "body_primary" },
+              { "x": 7, "y": 7, "color": "body_primary" },
+              { "x": 8, "y": 7, "color": "body_primary" },
+              { "x": 9, "y": 7, "color": "body_primary" },
+              { "x": 4, "y": 8, "color": "body_primary" },
+              { "x": 5, "y": 8, "color": "body_primary" },
+              { "x": 6, "y": 8, "color": "body_primary" },
+              { "x": 7, "y": 8, "color": "body_primary" },
+              { "x": 8, "y": 8, "color": "body_primary" },
+              { "x": 9, "y": 8, "color": "body_primary" },
+              { "x": 10, "y": 8, "color": "body_primary" },
+              { "x": 11, "y": 8, "color": "#4FC3F7" },
+              { "x": 4, "y": 9, "color": "body_primary" },
+              { "x": 5, "y": 9, "color": "eyes" },
+              { "x": 6, "y": 9, "color": "body_primary" },
+              { "x": 7, "y": 9, "color": "body_primary" },
+              { "x": 8, "y": 9, "color": "body_primary" },
+              { "x": 9, "y": 9, "color": "eyes" },
+              { "x": 10, "y": 9, "color": "body_primary" },
+              { "x": 11, "y": 9, "color": "#4FC3F7" },
+              { "x": 5, "y": 10, "color": "body_primary" },
+              { "x": 6, "y": 10, "color": "belly" },
+              { "x": 7, "y": 10, "color": "nose" },
+              { "x": 8, "y": 10, "color": "belly" },
+              { "x": 9, "y": 10, "color": "body_primary" }
+            ]
+          }
+        },
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 5, "y": 14, "color": "body_secondary" },
+              { "x": 6, "y": 15, "color": "body_secondary" },
+              { "x": 10, "y": 14, "color": "body_secondary" },
+              { "x": 11, "y": 15, "color": "body_secondary" }
+            ]
+          }
+        },
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 3, "y": 14, "color": "body_secondary" },
+              { "x": 4, "y": 15, "color": "body_secondary" },
+              { "x": 8, "y": 14, "color": "body_secondary" },
+              { "x": 9, "y": 15, "color": "body_secondary" }
+            ]
+          },
+          "head": {
+            "layer_order": 5,
+            "anchor": { "x": 7, "y": 10 },
+            "pixels": [
+              { "x": 5, "y": 7, "color": "body_primary" },
+              { "x": 6, "y": 7, "color": "body_primary" },
+              { "x": 7, "y": 7, "color": "body_primary" },
+              { "x": 8, "y": 7, "color": "body_primary" },
+              { "x": 9, "y": 7, "color": "body_primary" },
+              { "x": 4, "y": 8, "color": "body_primary" },
+              { "x": 5, "y": 8, "color": "body_primary" },
+              { "x": 6, "y": 8, "color": "body_primary" },
+              { "x": 7, "y": 8, "color": "body_primary" },
+              { "x": 8, "y": 8, "color": "body_primary" },
+              { "x": 9, "y": 8, "color": "body_primary" },
+              { "x": 10, "y": 8, "color": "body_primary" },
+              { "x": 11, "y": 8, "color": "#4FC3F7" },
+              { "x": 4, "y": 9, "color": "body_primary" },
+              { "x": 5, "y": 9, "color": "eyes" },
+              { "x": 6, "y": 9, "color": "body_primary" },
+              { "x": 7, "y": 9, "color": "body_primary" },
+              { "x": 8, "y": 9, "color": "body_primary" },
+              { "x": 9, "y": 9, "color": "eyes" },
+              { "x": 10, "y": 9, "color": "body_primary" },
+              { "x": 11, "y": 9, "color": "#4FC3F7" },
+              { "x": 5, "y": 10, "color": "body_primary" },
+              { "x": 6, "y": 10, "color": "belly" },
+              { "x": 7, "y": 10, "color": "nose" },
+              { "x": 8, "y": 10, "color": "belly" },
+              { "x": 9, "y": 10, "color": "body_primary" }
+            ]
+          }
+        },
+        null
+      ]
     },
     "mischief": {
       "fps": 8,
       "loop": true,
       "frameCount": 4,
-      "frames": [null, null, null, null]
+      "frames": [
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 14, "color": "body_secondary" },
+              { "x": 5, "y": 15, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 15, "color": "body_secondary" }
+            ]
+          },
+          "tail": {
+            "layer_order": 2,
+            "anchor": { "x": 3, "y": 12 },
+            "pixels": [
+              { "x": 3, "y": 12, "color": "body_secondary" },
+              { "x": 2, "y": 11, "color": "body_primary" },
+              { "x": 2, "y": 9, "color": "body_primary" },
+              { "x": 1, "y": 8, "color": "body_primary" },
+              { "x": 1, "y": 7, "color": "belly" }
+            ]
+          }
+        },
+        {
+          "tail": {
+            "layer_order": 2,
+            "anchor": { "x": 3, "y": 12 },
+            "pixels": [
+              { "x": 3, "y": 12, "color": "body_secondary" },
+              { "x": 2, "y": 10, "color": "body_primary" },
+              { "x": 1, "y": 8, "color": "body_primary" },
+              { "x": 0, "y": 7, "color": "belly" },
+              { "x": 1, "y": 6, "color": "belly" }
+            ]
+          }
+        },
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 14, "color": "body_secondary" },
+              { "x": 5, "y": 15, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 15, "color": "body_secondary" }
+            ]
+          },
+          "tail": {
+            "layer_order": 2,
+            "anchor": { "x": 3, "y": 12 },
+            "pixels": [
+              { "x": 3, "y": 12, "color": "body_secondary" },
+              { "x": 2, "y": 11, "color": "body_primary" },
+              { "x": 2, "y": 9, "color": "body_primary" },
+              { "x": 1, "y": 8, "color": "body_primary" },
+              { "x": 1, "y": 7, "color": "belly" }
+            ]
+          }
+        },
+        {
+          "ears": {
+            "layer_order": 6,
+            "anchor": { "x": 7, "y": 6 },
+            "pixels": [
+              { "x": 3, "y": 6, "color": "body_secondary" },
+              { "x": 10, "y": 6, "color": "body_secondary" },
+              { "x": 2, "y": 7, "color": "body_secondary" },
+              { "x": 11, "y": 7, "color": "body_secondary" }
+            ]
+          }
+        }
+      ]
     },
     "pomo_work": {
       "fps": 8,
       "loop": true,
       "frameCount": 4,
-      "frames": [null, null, null, null]
+      "frames": [
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 11, "color": "body_secondary" },
+              { "x": 5, "y": 11, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 15, "color": "body_secondary" }
+            ]
+          }
+        },
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 13, "color": "body_secondary" },
+              { "x": 5, "y": 13, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 15, "color": "body_secondary" }
+            ]
+          }
+        },
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 11, "color": "body_secondary" },
+              { "x": 5, "y": 11, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 15, "color": "body_secondary" }
+            ]
+          }
+        },
+        {
+          "head": {
+            "layer_order": 5,
+            "anchor": { "x": 7, "y": 10 },
+            "pixels": [
+              { "x": 5, "y": 8, "color": "body_primary" },
+              { "x": 6, "y": 8, "color": "body_primary" },
+              { "x": 7, "y": 8, "color": "body_primary" },
+              { "x": 8, "y": 8, "color": "body_primary" },
+              { "x": 9, "y": 8, "color": "body_primary" },
+              { "x": 4, "y": 9, "color": "body_primary" },
+              { "x": 5, "y": 9, "color": "body_primary" },
+              { "x": 6, "y": 9, "color": "body_primary" },
+              { "x": 7, "y": 9, "color": "body_primary" },
+              { "x": 8, "y": 9, "color": "body_primary" },
+              { "x": 9, "y": 9, "color": "body_primary" },
+              { "x": 10, "y": 9, "color": "body_primary" },
+              { "x": 4, "y": 10, "color": "body_primary" },
+              { "x": 5, "y": 10, "color": "eyes" },
+              { "x": 6, "y": 10, "color": "body_primary" },
+              { "x": 7, "y": 10, "color": "body_primary" },
+              { "x": 8, "y": 10, "color": "body_primary" },
+              { "x": 9, "y": 10, "color": "eyes" },
+              { "x": 10, "y": 10, "color": "body_primary" },
+              { "x": 5, "y": 11, "color": "body_primary" },
+              { "x": 6, "y": 11, "color": "belly" },
+              { "x": 7, "y": 11, "color": "nose" },
+              { "x": 8, "y": 11, "color": "belly" },
+              { "x": 9, "y": 11, "color": "body_primary" }
+            ]
+          },
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 11, "color": "body_secondary" },
+              { "x": 5, "y": 11, "color": "body_secondary" },
+              { "x": 9, "y": 14, "color": "body_secondary" },
+              { "x": 10, "y": 15, "color": "body_secondary" }
+            ]
+          }
+        }
+      ]
     },
     "pomo_break": {
       "fps": 6,
       "loop": true,
       "frameCount": 3,
-      "frames": [null, null, null]
+      "frames": [
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 3, "y": 12, "color": "body_secondary" },
+              { "x": 4, "y": 13, "color": "body_secondary" },
+              { "x": 10, "y": 12, "color": "body_secondary" },
+              { "x": 11, "y": 13, "color": "body_secondary" }
+            ]
+          }
+        },
+        {
+          "legs": {
+            "layer_order": 4,
+            "anchor": { "x": 8, "y": 14 },
+            "pixels": [
+              { "x": 4, "y": 13, "color": "body_secondary" },
+              { "x": 5, "y": 14, "color": "body_secondary" },
+              { "x": 9, "y": 13, "color": "body_secondary" },
+              { "x": 10, "y": 14, "color": "body_secondary" }
+            ]
+          }
+        },
+        null
+      ]
     }
   }
 }
