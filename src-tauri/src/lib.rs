@@ -38,13 +38,28 @@ fn get_monitor_bounds(app: tauri::AppHandle) -> Result<Vec<MonitorBounds>, Strin
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .setup(|_app| {
-            // On Windows, start in click-through mode; frontend toggles per-region via set_ignore_cursor_events
-            #[cfg(target_os = "windows")]
-            {
-                if let Some(window) = _app.get_webview_window("main") {
-                    let _ = window.set_ignore_cursor_events(true);
+        .setup(|app| {
+            use tauri::Manager;
+            if let Some(window) = app.get_webview_window("main") {
+                // Size the window to the primary monitor's LOGICAL pixel dimensions so it
+                // never overflows on HiDPI/Retina displays (physical px / scale_factor = logical px).
+                if let Ok(Some(monitor)) = window.primary_monitor() {
+                    let scale = monitor.scale_factor();
+                    let phys = monitor.size();
+                    let logical_w = phys.width  as f64 / scale;
+                    let logical_h = phys.height as f64 / scale;
+                    let _ = window.set_size(tauri::Size::Logical(tauri::LogicalSize {
+                        width: logical_w,
+                        height: logical_h,
+                    }));
+                    let _ = window.set_position(tauri::Position::Logical(
+                        tauri::LogicalPosition { x: 0.0, y: 0.0 },
+                    ));
                 }
+
+                // On Windows, start in click-through mode; frontend toggles per-region
+                #[cfg(target_os = "windows")]
+                let _ = window.set_ignore_cursor_events(true);
             }
             Ok(())
         })

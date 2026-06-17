@@ -31,21 +31,20 @@
   }
 
   onMount(async () => {
-    let primaryMonitor = { width: 1920, height: 1080 };
-
     if (isTauri()) {
-      const monitors = await invoke<Array<{ x: number; y: number; width: number; height: number }>>(
+      // get_monitor_bounds returns physical pixels; we only use it to confirm
+      // a monitor exists. Actual sizing uses logical pixels (window.inner*)
+      // so canvas coordinates match CSS and nothing overflows on HiDPI displays.
+      await invoke<Array<{ x: number; y: number; width: number; height: number }>>(
         'get_monitor_bounds'
       );
-      if (monitors.length > 0) {
-        primaryMonitor = monitors[0];
-        canvasWidth = primaryMonitor.width;
-        canvasHeight = primaryMonitor.height;
-      }
     }
 
-    petStore.monitorW = primaryMonitor.width;
-    petStore.monitorH = primaryMonitor.height;
+    // Always size to the logical viewport — matches CSS 100vw/100vh exactly
+    canvasWidth  = window.innerWidth;
+    canvasHeight = window.innerHeight;
+    petStore.monitorW = canvasWidth;
+    petStore.monitorH = canvasHeight;
 
     if (!canvasEl) return;
 
