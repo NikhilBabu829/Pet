@@ -10,6 +10,7 @@
   import { FSM, FsmState, FsmEvent } from '$lib/ai/FSM';
   import { usePetAI } from '$lib/hooks/usePetAI';
   import { HYPERACTIVE_DOG_PROFILE, HYPERACTIVE_DOG_RATES } from '$lib/data/behaviorProfiles';
+  import { useTauriCommands } from '$lib/hooks/useTauriCommands';
 
   const isTauri = () =>
     typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window;
@@ -20,6 +21,7 @@
   let canvasEl = $state<HTMLCanvasElement | null>(null);
 
   let stopLoop: (() => void) | null = null;
+  let tauriCleanup: (() => void) | null = null;
   let wanderTargetX = 100;
 
   async function updateInteractiveRegions() {
@@ -106,11 +108,15 @@
     stopLoop = stop;
     startLoop();
 
+    const { destroy } = await useTauriCommands(fsm, petStore, HYPERACTIVE_DOG_RATES, canvasEl);
+    tauriCleanup = destroy;
+
     await updateInteractiveRegions();
   });
 
   onDestroy(() => {
     stopLoop?.();
+    tauriCleanup?.();
   });
 </script>
 
