@@ -1,7 +1,7 @@
 # Manager
 
 ## Current Sprint
-**Phase 4 — Finite State Machine — COMPLETE**
+**Phase 5 — Utility AI & Needs System — COMPLETE**
 
 ## Phase Status
 
@@ -13,7 +13,8 @@
 | 2 | COMPLETE | Sprite sheets + rendering pipeline done |
 | 3 | COMPLETE | Game loop + pet physics + wander timer (merged via PR #4) |
 | 4 | COMPLETE | Finite State Machine + MVP dog sprite (committed to agents) |
-| 5–16 | PENDING | — |
+| 5 | COMPLETE | Utility AI + Needs + behavior profiles (worktree-phase-5 → agents pending PR) |
+| 6–16 | PENDING | — |
 
 ## Phase 0 Agent Summary
 
@@ -104,7 +105,22 @@
 - `src/routes/+page.svelte`: FSM-driven game loop; loads dog MVP; FSM initialized with velocity callbacks (WALKING→60px/s, RUNNING→160px/s, else→0); per-frame: ARRIVE detection, PETTING→IDLE on animator.isDone; wander timer replaced by FSM-driven self-rescheduling timeout
 - Dog renders, wanders, idles; FSM transitions work; all phases (5–16) ready for future input/pomodoro/mischief/etc. signals
 
+## Phase 5 Agent Summary
+
+| Agent | Status | Verification |
+|-------|--------|--------------|
+| Frontend Agent | COMPLETE | `npm test` (77/77 pass), `npm run build` PASS |
+| UI Agent | N/A | No Phase 5 deliverables |
+| Backend Agent | N/A | No Phase 5 deliverables |
+
+## Phase 5 Key Outcomes
+- `src/lib/ai/needs.ts`: `Needs` type (hunger/attention/energy/fun, 0–1 satisfaction), `NeedDecayRates`, `createNeeds()`, `tickNeeds()` with clamp
+- `src/lib/ai/UtilityAI.ts`: `AiAction` enum (EAT/SEEK_ATTENTION/SLEEP/PLAY/WANDER), `scoreAction()` (urgency × multiplier + flat criticalBonus), `pickAction()`, `ACTION_TO_FSM_EVENT` mapping
+- `src/lib/data/behaviorProfiles.ts`: `LAZY_CAT_PROFILE` + `HYPERACTIVE_DOG_PROFILE` (UtilityProfile constants), `LAZY_CAT_RATES` + `HYPERACTIVE_DOG_RATES` (NeedDecayRates constants)
+- `src/lib/hooks/usePetAI.ts`: `usePetAI(fsm, profile, rates)` — each tick decays needs, scores actions, fires FSM event when cooldown (3s) expires and canTransition
+- `src/routes/+page.svelte`: random wander timer removed; `petAI.tick(deltaMs)` drives behavior from game loop; `HYPERACTIVE_DOG_PROFILE` active
+
 ## Next Phase
-**Phase 5 — Utility AI & Needs System**
-- Frontend Agent: `src/ai/needs.js` (needs: hunger, attention, energy, fun — 0–1 floats, decay per tick), `src/ai/UtilityAI.js` (score each action; critical bonus is flat-additive), `src/hooks/usePetAI.js` (integrate FSM + needs + scorer; decay + score + transition each tick)
-- UI Agent: N/A
+**Phase 6 — Input Reactivity**
+- Backend Agent: global keyboard hook (CGEventTap / WH_KEYBOARD_LL), mouse tracking, `get_activity_snapshot()` command
+- Frontend Agent: `useTauriCommands.ts` — listen to `typing-update` / `mouse-move` events; FSM transitions for typing, overheating, flee, petting; idle timer
