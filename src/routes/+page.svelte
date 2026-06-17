@@ -2,11 +2,12 @@
   import { onMount, onDestroy } from 'svelte';
   import { invoke } from '@tauri-apps/api/core';
   import { Renderer } from '$lib/canvas/renderer';
-  import { Animator, } from '$lib/canvas/animator';
-  import { loadSpriteSheet, FRAME_SIZE } from '$lib/canvas/spriteRasterizer';
-  import type { SpriteManifest } from '$lib/canvas/spriteRasterizer';
-  import { petStore, tickPet, scheduleWander } from '$lib/stores/petStore.svelte';
+  import { Animator } from '$lib/canvas/animator';
+  import { loadMvpSprite, extractAnimManifest } from '$lib/canvas/mvpRenderer';
+  import { FRAME_SIZE } from '$lib/canvas/spriteRasterizer';
+  import { petStore, tickPet } from '$lib/stores/petStore.svelte';
   import { useGameLoop } from '$lib/hooks/useGameLoop';
+  import { FSM, FsmState, FsmEvent } from '$lib/ai/FSM';
 
   const isTauri = () =>
     typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window;
@@ -17,7 +18,8 @@
   let canvasEl = $state<HTMLCanvasElement | null>(null);
 
   let stopLoop: (() => void) | null = null;
-  let cleanupWander: (() => void) | null = null;
+  let wanderTimerId: ReturnType<typeof setTimeout> | null = null;
+  let wanderTargetX = 100;
 
   async function updateInteractiveRegions() {
     if (!isTauri()) return;
@@ -25,6 +27,16 @@
       ignore: false,
       rect: { x: petStore.x, y: petStore.y, width: FRAME_SIZE * 2, height: FRAME_SIZE * 2 },
     });
+  }
+
+  function scheduleNextWander(fsm: FSM) {
+    const delayMs = 4000 + Math.random() * 4000;
+    wanderTimerId = setTimeout(() => {
+      if (fsm.canTransition(FsmEvent.WANDER)) {
+        fsm.transition(FsmEvent.WANDER);
+      }
+      scheduleNextWander(fsm);
+    }, delayMs);
   }
 
   onMount(async () => {
@@ -46,21 +58,58 @@
 
     if (!canvasEl) return;
 
-    const bitmap = await loadSpriteSheet('/sprites/tabby_cat_default.png');
-    const manifest: SpriteManifest = await fetch('/sprites/tabby_cat_default.json').then(r => r.json());
+    // Load dog MVP sprite
+    const mvpDef = await loadMvpSprite('/sprites/dog.json');
+    const animManifest = extractAnimManifest(mvpDef);
 
-    const renderer = new Renderer(canvasEl, bitmap, manifest);
+    const renderer = Renderer.fromMvp(canvasEl, mvpDef);
     renderer.resize(canvasWidth, canvasHeight);
 
-    const animator = new Animator(manifest);
+    const animator = new Animator(animManifest);
 
-    cleanupWander = scheduleWander();
+    // Create FSM with velocity callbacks
+    const fsm = new FSM(FsmState.IDLE, {
+      onEnter(state) {
+        switch (state) {
+          case FsmState.WALKING: {
+            const petW = FRAME_SIZE * 2;
+            const targetX = Math.random() * (petStore.monitorW - petW);
+            wanderTargetX = targetX;
+            petStore.vx = targetX > petStore.x ? 60 : -60;
+            petStore.facing = petStore.vx > 0 ? 'right' : 'left';
+            break;
+          }
+          case FsmState.RUNNING:
+            petStore.vx = petStore.facing === 'right' ? 160 : -160;
+            break;
+          default:
+            petStore.vx = 0;
+        }
+      },
+    });
+
+    scheduleNextWander(fsm);
 
     const { startLoop, stopLoop: stop } = useGameLoop((deltaMs) => {
       tickPet(deltaMs);
-      animator.setAnimation(petStore.animState);
+
+      // ARRIVE detection — within one frame's travel of target
+      if (fsm.currentState === FsmState.WALKING && fsm.canTransition(FsmEvent.ARRIVE)) {
+        const step = Math.abs(petStore.vx) * (deltaMs / 1000) + 1;
+        if (Math.abs(petStore.x - wanderTargetX) < step) {
+          fsm.transition(FsmEvent.ARRIVE);
+        }
+      }
+
+      // One-shot PETTING completion
+      if (fsm.currentState === FsmState.PETTING && animator.isDone) {
+        fsm.transition(FsmEvent.ANIM_DONE);
+      }
+
+      const animName = fsm.getAnimation();
+      animator.setAnimation(animName);
       const frameIndex = animator.tick(deltaMs);
-      renderer.draw(petStore.x, petStore.y, frameIndex, petStore.animState, petStore.facing);
+      renderer.draw(petStore.x, petStore.y, frameIndex, animName, petStore.facing);
     });
 
     stopLoop = stop;
@@ -71,7 +120,9 @@
 
   onDestroy(() => {
     stopLoop?.();
-    cleanupWander?.();
+    if (wanderTimerId) {
+      clearTimeout(wanderTimerId);
+    }
   });
 </script>
 
